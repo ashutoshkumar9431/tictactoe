@@ -1,18 +1,13 @@
-import React, {
-	useState
-}
-from 'react';
+import React from 'react';
 import Square from './Square';
-
-const Board = () => {
+/*function Board (){
 	const [board, setBoard] = useState(Array(9).fill(null));
 	const [isXNext, setIsXNext] = useState(false);
 
-	const handleSquareClick = position => {
+function handleSquareClick (position)  {
 		if (board[position]) {
 			return;
 		}
-
 		setBoard(prev => {
 			return prev.map((square, pos) => {
 				if (pos === position) {
@@ -23,51 +18,50 @@ const Board = () => {
 			});
 		});
 
-		setIsXNext(prev => !prev);
+		setIsXNext(prev => !prev);               //setIsXNext(prev => {    
+			                                             //return !prev});        
+	                                                 //};    
 	};
 
-	const renderSquare = position => {
-		return ( <
-			Square value = {
-				board[position]
-			}
+	 function renderSquare (position ) {
+		return ( 
+			<Square value = {board[position]}
 			onClick = {
-				() => handleSquareClick(position)
+				() => handleSquareClick(position)//here it is necessary to pass a function otherwise
+				                                 // it will automatically get filled with 0
 			}
 			/>
 		);
-	};
+	};*/
+const Board = ({ board, handleSquareClick }) => {
+  const renderSquare = position => {
+    return (
+      <Square
+        value={board[position]}
+        onClick={() => handleSquareClick(position)}
+      />
+    );
+  };
 
-	return ( <
-		div className = "board" >
-		<
-		div className = "board-row" > {
-			renderSquare(0)
-		} {
-			renderSquare(1)
-		} {
-			renderSquare(2)
-		} 
-		</div> <
-		div className = "board-row" > {
-			renderSquare(3)
-		} {
-			renderSquare(4)
-		} {
-			renderSquare(5)
-		} 
-		</div>
-     
-		<div className = "board-row" > {
-			renderSquare(6)
-		} {
-			renderSquare(7)
-		} {
-			renderSquare(8)
-		} 
-		</div> 
-		</div>
-	);
+  return (
+    <div className="board">
+      <div className="board-row">
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
+      </div>
+      <div className="board-row">
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
+      </div>
+      <div className="board-row">
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
+      </div>
+    </div>
+  );
 };
 
 export default Board;
